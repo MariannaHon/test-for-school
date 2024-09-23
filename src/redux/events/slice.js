@@ -27,7 +27,7 @@ const eventsSlice = createSlice({
             .addCase(fetchEvents.fulfilled, (state, action) => {
                 state.isLoading = false;
                 state.error = null;
-                state.items = action.payload;
+                state.items = action.payload.data;
             })
             .addCase(fetchEvents.rejected, handleRejected)
             .addCase(fetchEventById.pending, handlePending)

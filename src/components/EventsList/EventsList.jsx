@@ -11,13 +11,16 @@ const EventsList = () => {
 
     return (
         <div>
-            <ul>
-                {events.map(event => (
-                    <li key={event._id}>
-                        <Event event={event} />
-                    </li>
-                ))}
-            </ul>
+            {events.length === 0 ? (
+                <p>No events found</p>
+            ) : (
+                <ul>
+                    {events.map(event => (
+                        <li key={event._id}>
+                            <Event event={event} />
+                        </li>
+                    ))}
+                </ul>)}
         </div>
     )
 }

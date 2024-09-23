@@ -5,9 +5,9 @@ import { toast } from 'react-hot-toast';
 
 axios.defaults.baseURL = "https://test-for-school-db.onrender.com/";
 
-export const fetchEvents = createAsyncThunk("events/fetchAll", async (_, thunkAPI) => {
+export const fetchEvents = createAsyncThunk("events/fetchAll", async ({ page = 1, perPage = 10 }, thunkAPI) => {
     try {
-        const response = await axios.get("/events");
+        const response = await axios.get(`/events?page=${page}&perPage=${perPage}`);
         return response.data.data;
     } catch (e) {
         return thunkAPI.rejectWithValue(e.message) && toast.error('Something went wrong :( Try to reload your page.');
