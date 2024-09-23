@@ -1,6 +1,6 @@
 
 import './App.css'
-import { lazy } from "react";
+import { lazy, Suspense } from "react";
 import { Route, Routes } from 'react-router-dom';
 
 const BoardPage = lazy(() => import('../../pages/BoardPage/BoardPage.jsx'));
@@ -13,11 +13,13 @@ function App() {
     <>
       <h1>Welcome to Events registration App</h1>
       <p>Choose the event to your liking!</p>
-      <Routes>
-        <Route path="/" element={<BoardPage />} />
-        <Route path="/register" element={<RegistrationPage />} />
-        <Route path="/view" element={<ViewPage />} />
-      </Routes>
+      <Suspense>
+        <Routes>
+          <Route path="/" element={<BoardPage />} />
+          <Route path="/register" element={<RegistrationPage />} />
+          <Route path="/view" element={<ViewPage />} />
+        </Routes>
+      </Suspense>
     </>
   )
 }

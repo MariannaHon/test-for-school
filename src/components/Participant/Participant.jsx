@@ -1,10 +1,10 @@
 
 
-const Participant = () => {
+const Participant = ({ participant: { name, email } }) => {
     return (
         <div>
-            <h4>Some name</h4>
-            <p>example@gmail.com</p>
+            <h4>{name}</h4>
+            <p>{email}</p>
         </div>
     )
 }

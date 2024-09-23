@@ -11,11 +11,12 @@ import {
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
-// import { contactsReducer } from "./contacts/slice";
-// import { filtersReducer } from "./filters/slice";
+import { eventsReducer } from "./events/slice";
+import { participantsReducer } from "./participants/slice";
+import { filtersReducer } from "./filters/slice";
 
-const authPersistConfig = {
-    key: 'auth',
+const eventsPersistConfig = {
+    key: 'events',
     storage,
 };
 
@@ -23,8 +24,9 @@ const authPersistConfig = {
 export const store = configureStore({
     reducer: {
         // auth: persistReducer(authPersistConfig, authReducer),
-        // contacts: contactsReducer,
-        // filters: filtersReducer,
+        events: persistReducer(eventsPersistConfig, eventsReducer),
+        participants: participantsReducer,
+        filters: filtersReducer,
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({

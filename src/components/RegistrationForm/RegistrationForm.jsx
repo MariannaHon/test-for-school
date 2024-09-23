@@ -1,29 +1,35 @@
 
 
 
-// import { useDispatch } from 'react-redux';
-// import { register } from '../../redux/auth/operations';
+import { useDispatch } from 'react-redux';
+import { addParticipant } from '../../redux/participants/operations.js';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import css from './RegistrationForm.module.css';
 
+import { useLocation } from "react-router-dom"
+
 export default function RegistrationForm() {
-    // const dispatch = useDispatch();
+
+    const location = useLocation();
+    const eventId = location.state?.eventId;
+
+    const dispatch = useDispatch();
 
     const Validator = Yup.object().shape({
-        name: Yup.string().min(2, "Too Short!").max(15, "Too Long!").required("Required"),
+        name: Yup.string().min(3, "Too Short!").max(30, "Too Long!").required("Required"),
         email: Yup.string().email("Invalid email address").required("Required"),
-        date: Yup.number().required("Required"),
+        dateOfBirth: Yup.string().required("Required"),
     })
 
     const initialValues = {
         name: '',
         email: '',
-        date: '',
+        dateOfBirth: '',
     }
 
     const handleSubmit = (values, actions) => {
-        // dispatch(register(values));
+        dispatch(addParticipant({ ...values, eventId }));
         actions.resetForm();
     };
 
@@ -45,7 +51,7 @@ export default function RegistrationForm() {
                 </label>
                 <label className={css.label}>
                     Date of birth
-                    <Field className={css.input} type="password" name="password" />
+                    <Field className={css.input} type="text" name="dateOfBirth" />
                     <ErrorMessage className={css.error} name="password" component="div" />
                 </label>
                 <div>
